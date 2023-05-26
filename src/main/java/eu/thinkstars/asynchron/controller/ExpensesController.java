@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.math.BigDecimal;
+import java.util.Objects;
+
 @Controller
 @AllArgsConstructor
 public class ExpensesController {
@@ -20,6 +23,10 @@ public class ExpensesController {
     @GetMapping("/expenses")
     public String loadAllData(Model model) {
         model.addAttribute(EXPENSES, expensesService.fetchAllExpenses());
+        BigDecimal summe = expensesService.fetchAllExpenses().stream().filter(Objects::nonNull)
+                .map(ExpenseDto::getAmount).filter(Objects::nonNull).reduce(BigDecimal.ZERO, BigDecimal::add);
+        model.addAttribute("sum", summe);
+
         return EXPENSES;
     }
 
@@ -27,12 +34,20 @@ public class ExpensesController {
     public String loadExpensesData(Model model, @PathVariable("id") String id) {
         ExpenseDto expense = "create".equals(id) ? new ExpenseDto() : expensesService.fetchExpense(Long.valueOf(id));
         model.addAttribute("expense", expense);
+
         return "expense";
     }
 
     @PostMapping("/expenses")
     public String saveExpense(@ModelAttribute("expense") ExpenseDto expense) {
         expensesService.persistExpense(expense);
+
+        return "redirect:/" + EXPENSES;
+    }
+
+    @GetMapping("/expenses/delete/{id}")
+    public String dropExpense(@PathVariable("id") String id) {
+        expensesService.dropExpense(Long.valueOf(id));
 
         return "redirect:/" + EXPENSES;
     }

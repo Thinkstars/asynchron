@@ -29,4 +29,8 @@ public class ExpensesService {
     public ExpenseDto persistExpense(final ExpenseDto expenseDto) {
         return expenseMapper.entityToDto(expensesRepository.save(expenseMapper.dtoToEntity(expenseDto)));
     }
+
+    public void dropExpense(final Long id) {
+        expensesRepository.deleteById(id);
+    }
 }
