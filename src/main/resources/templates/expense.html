@@ -26,10 +26,10 @@
             </div>
         </div>
         <div class="mb-2 row">
-            <label class="col-sm-1 col-form-label" th:for="expenseTyp" for="expenseTyp"
+            <label class="col-sm-1 col-form-label" th:for="expenseType" for="expenseType"
                    th:text="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_TYP}"/>
             <div class="col-sm-3">
-                <select class="form-select" th:id="expenseTyp" id="expenseTyp" th:field="*{expenseTyp}"
+                <select class="form-select" th:id="expenseType" id="expenseType" th:field="*{expenseType}"
                         th:onchange="selectTyp()">
                     <option th:each="calculationType : ${calculationTypes}" th:value="${calculationType}"
                             th:text="#{'' + ${calculationType.getType()} + ''}"></option>

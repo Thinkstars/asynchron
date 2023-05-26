@@ -33,11 +33,11 @@ class ExpensesServiceTest extends AbstractApplicationTest {
     void fetchAllExpenses() {
         final var expense1 = Expense.builder()
                 .expenseName("Entfernungspauschale")
-                .expenseTyp(CalculationTyp.DEDUCTIONS_FOR_MILEAGE)
+                .expenseType(CalculationTyp.DEDUCTIONS_FOR_MILEAGE)
                 .millage(new BigDecimal(125)).build();
         final var expense2 = Expense.builder()
                 .expenseName("Entfernungspauschale")
-                .expenseTyp(CalculationTyp.DEDUCTIONS_FOR_MILEAGE)
+                .expenseType(CalculationTyp.DEDUCTIONS_FOR_MILEAGE)
                 .millage(new BigDecimal(125)).build();
         Mockito.when(expensesRepository.findAll()).thenReturn(Arrays.asList(expense1, expense2));
 
@@ -50,25 +50,25 @@ class ExpensesServiceTest extends AbstractApplicationTest {
     void fetchExpense() {
         final var expense = Expense.builder()
                 .expenseName("Entfernungspauschale")
-                .expenseTyp(CalculationTyp.DEDUCTIONS_FOR_MILEAGE)
+                .expenseType(CalculationTyp.DEDUCTIONS_FOR_MILEAGE)
                 .millage(new BigDecimal(125)).build();
         Mockito.when(expensesRepository.findById(Long.valueOf("1"))).thenReturn(Optional.of(expense));
 
         ExpenseDto expenseDto = expensesService.fetchExpense(Long.valueOf("1"));
 
-        assertEquals("Entfernungspauschale", readPropertyAsString(expenseDto.getExpenseTyp().getType()));
+        assertEquals("Entfernungspauschale", readPropertyAsString(expenseDto.getExpenseType().getType()));
     }
 
     @Test
     void persistExpense() {
         final var expenseDto = ExpenseDto.builder()
                 .expenseName("Entfernungspauschale")
-                .expenseTyp(CalculationTyp.DEDUCTIONS_FOR_MILEAGE)
+                .expenseType(CalculationTyp.DEDUCTIONS_FOR_MILEAGE)
                 .millage(new BigDecimal(125)).build();
         final var expense = Expense.builder()
                 .id(Long.valueOf("1"))
                 .expenseName("Entfernungspauschale")
-                .expenseTyp(CalculationTyp.DEDUCTIONS_FOR_MILEAGE)
+                .expenseType(CalculationTyp.DEDUCTIONS_FOR_MILEAGE)
                 .millage(new BigDecimal(125)).build();
 
         Mockito.when(expensesRepository.save(any(Expense.class))).thenReturn(expense);

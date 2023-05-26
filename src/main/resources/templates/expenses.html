@@ -39,7 +39,7 @@
                 </tr>
                 <tr th:each="expense: ${expenses}">
                     <th scope="row" th:text="${expense.expenseName}"></th>
-                    <td th:text="#{'' +  ${expense.expenseTyp.getType()} + ''}"></td>
+                    <td th:text="#{'' +  ${expense.getExpenseType.getType()} + ''}"></td>
                     <td th:text="${expense.amount}"></td>
                     <td>
                         <a class="fa-regular fa-pen-to-square icon-dark"
@@ -48,7 +48,7 @@
                         <a th:href="@{/expenses/delete/{id}(id = ${expense.id})}"
                            th:data-longDescription="#{APPLICATION.WEB.PAGES.EXPENSES.WARNING.DROP_RECORD(${expense.expenseName})}"
                            onclick="return confirm(this.getAttribute('data-longDescription'))"
-                           th:customerName="${expense.expenseName}" id="btnDelete"
+                           th:expenseName="${expense.expenseName}" id="btnDelete"
                            th:title="#{APPLICATION.WEB.PAGES.GENERAL.REMOVE}"
                            class="fa-regular fa-trash-can icon-dark btn-delete"></a>
                     </td>
@@ -56,13 +56,6 @@
                 </tbody>
             </table>
 
-        </div>
-    </div>
-    <div class="container">
-        <div class="row mt-5">
-            <div class="col">
-                <th:block th:replace="sections/dialogs :: dialog('expense')"></th:block>
-            </div>
         </div>
     </div>
 </div>

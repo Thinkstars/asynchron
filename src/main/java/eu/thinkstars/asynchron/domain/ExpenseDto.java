@@ -14,7 +14,7 @@ public class ExpenseDto {
 
     private Long id;
     private String expenseName;
-    private CalculationTyp expenseTyp;
+    private CalculationTyp expenseType;
     private BigDecimal amount;
     private BigDecimal millage;
     private BigDecimal dayRange;

@@ -5,14 +5,16 @@ $(document).ready(function () {
 function calculateAmount(multiplicator) {
     $.get("/calculateamount", {
         multiplicator: multiplicator,
-        calculationTyp: $('#expenseTyp option:selected').val()
-    }, function (data) {
+        calculationTyp: $('#expenseType option:selected').val()
+    }).done(function (data) {
         $('#amount').val(data.amount);
-    })
+    }).fail(function () {
+        alert("Ups, something went wrong!");
+    });
 }
 
 function selectTyp() {
-    var selectedElement = $('#expenseTyp option:selected').val();
+    var selectedElement = $('#expenseType option:selected').val();
 
     if (selectedElement === 'PER_DIEMS') {
         $('#distanceDiv').addClass("d-none");

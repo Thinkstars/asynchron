@@ -23,7 +23,7 @@ public class Expense {
 
     @Column
     @Enumerated(EnumType.ORDINAL)
-    private CalculationTyp expenseTyp;
+    private CalculationTyp expenseType;
 
     @Column
     private BigDecimal amount;
