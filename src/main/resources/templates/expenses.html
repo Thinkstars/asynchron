@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax Call Example</title>
+    <link th:href="@{/webjars/font-awesome/css/all.min.css}" th:rel="stylesheet" type="text/css"/>
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" th:rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+    <script th:src="@{/javascript/functions.js}"></script>
+
+</head>
+<body>
+<div class="container mt-3">
+    <div class="d-grid gap-2 d-md-block">
+        <a class="btn btn-primary" th:href="@{/expenses/create}">
+            <i class="fa fa-plus-circle"></i>
+            <span class="m-1" th:text="#{APPLICATION.WEB.PAGES.EXPENSES.NEW.EXPENSE}"></span>
+        </a>
+    </div>
+</div>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-8 mt-5">
+            <table class="table table-striped table-hover table-responsive-xl" aria-describedby="listOfExpenses">
+                <thead>
+                <tr>
+                    <th scope="col" th:text="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_ART}"></th>
+                    <th scope="col" th:text="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_TYP}"></th>
+                    <th scope="col" th:text="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_AMOUNT}"></th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${expenses.isEmpty()}">
+                    <td colspan="4" th:text="#{APPLICATION.WEB.PAGES.GENERAL.NODATA}"></td>
+                </tr>
+                <tr th:each="expense: ${expenses}">
+                    <th scope="row" th:text="${expense.expenseName}"></th>
+                    <td th:text="#{'' +  ${expense.expenseTyp.getType()} + ''}"></td>
+                    <td th:text="${expense.amount}"></td>
+                    <td>
+                        <a class="fa-regular fa-pen-to-square icon-dark"
+                           th:href="@{'/expenses/' + ${expense.id}}"
+                           th:title="#{APPLICATION.WEB.PAGES.GENERAL.CHANGE}"></a>
+                        <a th:href="@{/expenses/delete/{id}(id = ${expense.id})}"
+                           th:data-longDescription="#{APPLICATION.WEB.PAGES.EXPENSES.WARNING.DROP_RECORD(${expense.expenseName})}"
+                           onclick="return confirm(this.getAttribute('data-longDescription'))"
+                           th:customerName="${expense.expenseName}" id="btnDelete"
+                           th:title="#{APPLICATION.WEB.PAGES.GENERAL.REMOVE}"
+                           class="fa-regular fa-trash-can icon-dark btn-delete"></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col">
+                <th:block th:replace="sections/dialogs :: dialog('expense')"></th:block>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
