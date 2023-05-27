@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 
 @Entity
 @Getter
@@ -36,4 +37,10 @@ public class Expense {
 
     @Column
     private String comment;
+
+    @Temporal(TemporalType.DATE)
+    private Date dateFrom;
+
+    @Temporal(TemporalType.DATE)
+    private Date dateTo;
 }

@@ -2,7 +2,22 @@ $(document).ready(function () {
     selectTyp();
 });
 
-function calculateAmount(multiplicator) {
+function calculateAmount() {
+    if ($('#expenseType option:selected').val() === 'PER_DIEMS') {
+        sendRestRequest(calculateDayDifference());
+    } else {
+        sendRestRequest($('#distance').val());
+    }
+}
+
+function calculateDayDifference() {
+    let dateFrom = new Date($('#dayRange').val());
+    let dateTo = new Date($('#dayRangeTo').val());
+
+    return Math.ceil((dateTo - dateFrom) / (1000 * 3600 * 24));
+}
+
+function sendRestRequest(multiplicator) {
     $.get("/calculateamount", {
         multiplicator: multiplicator,
         calculationTyp: $('#expenseType option:selected').val()
@@ -18,10 +33,10 @@ function selectTyp() {
 
     if (selectedElement === 'PER_DIEMS') {
         $('#distanceDiv').addClass("d-none");
-        $('#dayRangeDiv').removeClass("d-none");
+        $('#dayRangeToDiv').removeClass("d-none");
     } else {
         $('#distanceDiv').removeClass("d-none");
-        $('#dayRangeDiv').addClass("d-none");
+        $('#dayRangeToDiv').addClass("d-none");
     }
 
 }

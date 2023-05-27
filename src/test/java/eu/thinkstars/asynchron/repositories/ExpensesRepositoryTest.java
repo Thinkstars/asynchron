@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -26,7 +27,8 @@ class ExpensesRepositoryTest {
     @DisplayName("Kosteninstanz erstellen und speichern")
     void createAndPersistExpense() {
         ExpenseDto expenseDto =
-                new ExpenseDto(null, "Fahrt nach Stuttgart", CalculationTyp.DEDUCTIONS_FOR_MILEAGE, null, new BigDecimal(237), null, "");
+                new ExpenseDto(null, "Fahrt nach Stuttgart", CalculationTyp.DEDUCTIONS_FOR_MILEAGE, null,
+                        new BigDecimal(237), null, "", Date.valueOf("2023-01-10"), Date.valueOf("2023-01-15"));
 
         Expense expense = expenseRepository.save(expenseMapper.dtoToEntity(expenseDto));
 

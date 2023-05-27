@@ -17,7 +17,7 @@
     <form method="post" th:object="${expense}" th:action="@{/expenses}">
         <input th:field="*{id}" th:value="${expense.id}" type="hidden"/>
         <div class="mb-2 row">
-            <label class="col-sm-1 col-form-label" th:for="expenseName" for="expenseName"
+            <label class="col-sm-2 col-form-label" th:for="expenseName" for="expenseName"
                    th:text="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_ART}"/>
             <div class="col-sm-3">
                 <input th:id="expenseName" id="expenseName" th:name="${expenseName}" class="form-control" type="text"
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="mb-2 row">
-            <label class="col-sm-1 col-form-label" th:for="expenseType" for="expenseType"
+            <label class="col-sm-2 col-form-label" th:for="expenseType" for="expenseType"
                    th:text="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_TYP}"/>
             <div class="col-sm-3">
                 <select class="form-select" th:id="expenseType" id="expenseType" th:field="*{expenseType}"
@@ -37,39 +37,45 @@
             </div>
         </div>
         <div id="distanceDiv" class="mb-2 row">
-            <label class="col-sm-1 col-form-label" th:for="distance" for="distance"
+            <label class="col-sm-2 col-form-label" th:for="distance" for="distance"
                    th:text="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_DISTANCE}"/>
             <div class="col-sm-2">
                 <input th:id="distance" id="distance" th:name="${distance}" class="form-control" type="text"
                        th:value="${expense.millage}" th:field="${expense.millage}"
                        th:placeholder="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_DISTANCE}"
-                       th:onchange="calculateAmount(this.value)"/>
+                       th:onchange="calculateAmount()"/>
             </div>
-            <label class="col-sm-1 col-form-label" th:for="distance" for="distance"
+            <label class="col-sm-2 col-form-label" th:for="distance" for="distance"
                    th:text="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_DISTANCE_UNITS}"/>
         </div>
         <div id="dayRangeDiv" class="mb-2 row">
-            <label class="col-sm-1 col-form-label" th:for="dayRange" for="dayRange"
-                   th:text="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_DAYRANGE}"/>
+            <label class="col-sm-2 col-form-label" th:for="dayRange" for="dayRange"
+                   th:text="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_FROM}"/>
             <div class="col-sm-2">
-                <input th:id="dayRange" id="dayRange" th:name="${dayRange}" class="form-control" type="text"
-                       th:value="${expense.dayRange}" th:field="${expense.dayRange}"
-                       th:placeholder="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_DAYRANGE}"
-                       th:onchange="calculateAmount(this.value)"/>
+                <input class="form-control" id="dayRange" type="date" th:field="${expense.dateFrom}"
+                       th:onchange="calculateAmount()">
+            </div>
+        </div>
+        <div id="dayRangeToDiv" class="mb-2 row">
+            <label class="col-sm-2 col-form-label" th:for="dayRangeTo" for="dayRangeTo"
+                   th:text="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_TO}"/>
+            <div class="col-sm-2">
+                <input class="form-control" id="dayRangeTo" type="date" th:field="${expense.dateTo}"
+                       th:onchange="calculateAmount()"/>
             </div>
         </div>
         <div class="mb-2 row">
-            <label class="col-sm-1 col-form-label" th:for="amount" for="amount"
+            <label class="col-sm-2 col-form-label" th:for="amount" for="amount"
                    th:text="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_AMOUNT}"/>
             <div class="col-sm-2">
                 <input th:id="amount" id="amount" th:name="${amount}" class="form-control" type="text"
                        th:value="${expense.amount}" th:field="${expense.amount}" readonly/>
             </div>
-            <label class="col-sm-1 col-form-label" th:for="amount" for="amount"
+            <label class="col-sm-2 col-form-label" th:for="amount" for="amount"
                    th:text="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_AMOUNT_UNITS}"/>
         </div>
         <div class="mb-2 row">
-            <label class="col-sm-1 col-form-label" th:for="comment" for="comment"
+            <label class="col-sm-2 col-form-label" th:for="comment" for="comment"
                    th:text="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_COMMENT}"/>
             <div class="col-sm-3">
                 <textarea th:id="comment" id="comment" th:name="${comment}" class="form-control"
