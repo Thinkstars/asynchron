@@ -6,6 +6,7 @@ import eu.thinkstars.asynchron.utils.ExpenseMapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -19,7 +20,10 @@ public class ExpensesService {
     }
 
     public List<ExpenseDto> fetchAllExpenses() {
-        return expenseMapper.etitiesToDtos(expensesRepository.findAll());
+        List<ExpenseDto> expenses = expenseMapper.etitiesToDtos(expensesRepository.findAll());
+        Collections.sort(expenses);
+
+        return expenses;
     }
 
     public ExpenseDto fetchExpense(final Long expenseId) {

@@ -29,17 +29,19 @@
                 <tr>
                     <th scope="col" th:text="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_ART}"></th>
                     <th scope="col" th:text="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_TYP}"></th>
+                    <th scope="col"></th>
                     <th scope="col" th:text="#{APPLICATION.WEB.PAGES.EXPENSES.EXPENSE_AMOUNT}"></th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:if="${expenses.isEmpty()}">
-                    <td colspan="4" th:text="#{APPLICATION.WEB.PAGES.GENERAL.NODATA}"></td>
+                    <td colspan="5" th:text="#{APPLICATION.WEB.PAGES.GENERAL.NODATA}"></td>
                 </tr>
                 <tr th:each="expense: ${expenses}">
                     <th scope="row" th:text="${expense.expenseName}"></th>
                     <td th:text="#{'' +  ${expense.getExpenseType.getType()} + ''}"></td>
+                    <td th:text="${expense.showDate()}"></td>
                     <td th:text="${expense.amount}"></td>
                     <td>
                         <a class="fa-regular fa-pen-to-square icon-dark"
