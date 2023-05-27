@@ -13,6 +13,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -34,10 +36,15 @@ class ExpensesServiceTest extends AbstractApplicationTest {
         final var expense1 = Expense.builder()
                 .expenseName("Entfernungspauschale")
                 .expenseType(CalculationTyp.DEDUCTIONS_FOR_MILEAGE)
-                .millage(new BigDecimal(125)).build();
+                .millage(new BigDecimal(125))
+                .dateFrom(Date.valueOf(LocalDate.now()))
+                .dateTo(Date.valueOf(LocalDate.now()))
+                .build();
         final var expense2 = Expense.builder()
                 .expenseName("Entfernungspauschale")
                 .expenseType(CalculationTyp.DEDUCTIONS_FOR_MILEAGE)
+                .dateFrom(Date.valueOf(LocalDate.now()))
+                .dateTo(Date.valueOf(LocalDate.now()))
                 .millage(new BigDecimal(125)).build();
         Mockito.when(expensesRepository.findAll()).thenReturn(Arrays.asList(expense1, expense2));
 
@@ -51,7 +58,10 @@ class ExpensesServiceTest extends AbstractApplicationTest {
         final var expense = Expense.builder()
                 .expenseName("Entfernungspauschale")
                 .expenseType(CalculationTyp.DEDUCTIONS_FOR_MILEAGE)
-                .millage(new BigDecimal(125)).build();
+                .millage(new BigDecimal(125))
+                .dateFrom(Date.valueOf(LocalDate.now()))
+                .dateTo(Date.valueOf(LocalDate.now()))
+                .build();
         Mockito.when(expensesRepository.findById(Long.valueOf("1"))).thenReturn(Optional.of(expense));
 
         ExpenseDto expenseDto = expensesService.fetchExpense(Long.valueOf("1"));
@@ -64,12 +74,18 @@ class ExpensesServiceTest extends AbstractApplicationTest {
         final var expenseDto = ExpenseDto.builder()
                 .expenseName("Entfernungspauschale")
                 .expenseType(CalculationTyp.DEDUCTIONS_FOR_MILEAGE)
-                .millage(new BigDecimal(125)).build();
+                .millage(new BigDecimal(125))
+                .dateFrom(Date.valueOf(LocalDate.now()))
+                .dateTo(Date.valueOf(LocalDate.now()))
+                .build();
         final var expense = Expense.builder()
                 .id(Long.valueOf("1"))
                 .expenseName("Entfernungspauschale")
                 .expenseType(CalculationTyp.DEDUCTIONS_FOR_MILEAGE)
-                .millage(new BigDecimal(125)).build();
+                .millage(new BigDecimal(125))
+                .dateFrom(Date.valueOf(LocalDate.now()))
+                .dateTo(Date.valueOf(LocalDate.now()))
+                .build();
 
         Mockito.when(expensesRepository.save(any(Expense.class))).thenReturn(expense);
 

@@ -88,7 +88,8 @@
                 <input class="btn btn-primary" type="submit" th:value="#{APPLICATION.WEB.PAGES.GENERAL.SAVE}">
             </div>
             <div class="col-sm-3">
-                <input class="btn btn-warning" type="reset" th:value="#{APPLICATION.WEB.PAGES.GENERAL.REMOVE}">
+                <input class="btn btn-danger" onclick="location.href = '/expenses'"
+                       th:value="#{APPLICATION.WEB.PAGES.GENERAL.REMOVE}">
             </div>
         </div>
     </form>
