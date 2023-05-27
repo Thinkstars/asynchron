@@ -6,7 +6,7 @@ import eu.thinkstars.asynchron.utils.ExpenseMapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -21,7 +21,7 @@ public class ExpensesService {
 
     public List<ExpenseDto> fetchAllExpenses() {
         List<ExpenseDto> expenses = expenseMapper.etitiesToDtos(expensesRepository.findAll());
-        Collections.sort(expenses);
+        expenses.sort(createExpenseComparator());
 
         return expenses;
     }
@@ -36,5 +36,9 @@ public class ExpensesService {
 
     public void dropExpense(final Long id) {
         expensesRepository.deleteById(id);
+    }
+
+    private static Comparator<ExpenseDto> createExpenseComparator() {
+        return Comparator.comparing(ExpenseDto::getDateFrom).thenComparing(ExpenseDto::getDateTo);
     }
 }
