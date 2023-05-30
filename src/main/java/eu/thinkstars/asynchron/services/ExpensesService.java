@@ -1,6 +1,7 @@
 package eu.thinkstars.asynchron.services;
 
 import eu.thinkstars.asynchron.domain.ExpenseDto;
+import eu.thinkstars.asynchron.enums.CalculationTyp;
 import eu.thinkstars.asynchron.repositories.ExpensesRepository;
 import eu.thinkstars.asynchron.utils.ExpenseMapper;
 import org.mapstruct.factory.Mappers;
@@ -31,6 +32,9 @@ public class ExpensesService {
     }
 
     public ExpenseDto persistExpense(final ExpenseDto expenseDto) {
+        if (expenseDto.getExpenseType().equals(CalculationTyp.DEDUCTIONS_FOR_MILEAGE)) {
+            expenseDto.setDateTo(expenseDto.getDateFrom());
+        }
         return expenseMapper.entityToDto(expensesRepository.save(expenseMapper.dtoToEntity(expenseDto)));
     }
 

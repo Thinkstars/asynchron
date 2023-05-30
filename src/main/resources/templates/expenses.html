@@ -48,7 +48,7 @@
                            th:href="@{'/expenses/' + ${expense.id}}"
                            th:title="#{APPLICATION.WEB.PAGES.GENERAL.CHANGE}"></a>
                         <a th:href="@{/expenses/delete/{id}(id = ${expense.id})}"
-                           th:data-longDescription="#{APPLICATION.WEB.PAGES.EXPENSES.WARNING.DROP_RECORD(${expense.expenseName})}"
+                           th:data-longDescription="#{APPLICATION.WEB.PAGES.EXPENSES.WARNING.DROP_RECORD(#{${expense.getExpenseType.getType()}})}"
                            onclick="return confirm(this.getAttribute('data-longDescription'))"
                            th:expenseName="${expense.expenseName}" id="btnDelete"
                            th:title="#{APPLICATION.WEB.PAGES.GENERAL.REMOVE}"
