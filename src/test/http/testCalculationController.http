@@ -1,2 +1,2 @@
-GET localhost:8080/calculateamount?{{multiplicator}}&{{calculationTyp}}
+GET localhost:8080/calculateamount?multiplicator={{multiplicator}}&calculationTyp={{calculationTyp}}
 Accept: application/json
